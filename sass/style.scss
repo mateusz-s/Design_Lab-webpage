@@ -176,6 +176,7 @@ button {
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    overflow: hidden;
     &-content {
         text-align: center;
         @media (min-width: $break-xl) {
@@ -187,10 +188,15 @@ button {
         letter-spacing: 5px;
     }
     &-paragraph {
+        margin-bottom: 0;
         font-size: 1.5rem;
         font-weight: $regular;
-        line-height: 2.9rem;
+        line-height: 2.6rem;
         text-transform: uppercase;
+        @media (min-width: $break-sm) {
+            line-height: 2.9rem;
+            margin-bottom: 1em;
+        }
         @media (min-width: $break-xl) {
             margin-bottom: 20%;
         }
