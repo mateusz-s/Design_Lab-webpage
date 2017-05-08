@@ -3,9 +3,10 @@ $grid-columns: 12;
 $max-col-width: 100%;
 $min-col-width: $max-col-width / $grid-columns;
 
-$break-sm: 768px;
-$break-md: 992px;
-$break-lg: 1200px;
+$break-sm: 576px;
+$break-md: 768px;
+$break-lg: 992px;
+$break-xl: 1200px;
 
 //Fonts
 $base-font-family: 'Lato', sans-serif;
@@ -16,8 +17,10 @@ $regular: 400;
 $bold: 700;
 
 //Colors
+$main-bg-color: #A8B3C8;
 $text-color-1: #3C3C3C;
 $text-color-2: #FFFFFF;
+$btn-bg-color: #3C3C3C;
 
 //Mixins
 @mixin column-size($size) {
@@ -45,26 +48,51 @@ body {
 }
 
 h1 {
-    font-size: 4rem;
+    margin: 3% 0;
+    font-size: 3.6rem;
     font-weight: $bold;
-    @media (min-width: $break-sm) {
+    @media (min-width: $break-md) {
         font-size: 5.4rem;
     }
 }
 
 h2 {
-    width: 46.8%;
-    margin: 0 auto;
+    display: inline-block;
     font-size: 3.4rem;
     font-weight: $bold;
     text-transform: uppercase;
     letter-spacing: 2px;
-    background-color: #FFFFFF;
+    position: relative;
+    @media (min-width: $break-sm) {
+        width: 420px;
+        padding: 0;
+    }
+}
+
+h2:before {
+    content: '';
+    display: block;
+    width: 1000px;
+    border-top: 2px solid;
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    transform: translateY(-50%);
+    top: 50%;
+    left: calc(100% + 40px);
+    @media (min-width: $break-sm) {
+        left: 100%;
+    }
+}
+
+h2:after {
+    content: '';
+    display: block;
+    width: 1000px;
+    border-top: 2px solid;
+    position: absolute;
+    top: 50%;
+    right: calc(100% + 40px);
+    @media (min-width: $break-sm) {
+        right: 100%;
+    }
 }
 
 h3 {
@@ -88,6 +116,7 @@ img {
 }
 
 button {
+    padding: 0;
     outline: none;
     cursor: pointer;
 }
@@ -102,7 +131,17 @@ button {
 .frame {
     position: relative;
     border: 2px solid;
+    border-top: none;
     text-align: center;
+}
+
+.heading {
+    position: absolute;
+    top: 0;
+    left: -2px;
+    transform: translateY(-50%);
+    width: calc(100% + 4px);
+    overflow: hidden;
 }
 
 /* === GRID SYSTEM STYLES === */
@@ -128,40 +167,46 @@ button {
 
 /* === PAGE-HEADER STYLES === */
 .page-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100vh;
     color: $text-color-2;
-    background-image: url('../img/header-bg-img.jpg');
+    background-color: $main-bg-color;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     &-content {
-        //width: 65%;
-        padding-top: 29%;
-        //margin: 0 auto;
         text-align: center;
+        @media (min-width: $break-xl) {
+            padding-top: 18%;
+        }
     }
     &-heading {
         text-transform: uppercase;
         letter-spacing: 5px;
-        & span {
-            display: block;
-        }
     }
     &-paragraph {
-        margin-bottom: 21%;
         font-size: 1.5rem;
         font-weight: $regular;
         line-height: 2.9rem;
         text-transform: uppercase;
-        & span {
-            display: block;
+        @media (min-width: $break-xl) {
+            margin-bottom: 20%;
         }
+    }
+    .scroll-icon {
+        font-size: 5rem;
+        animation-name: scroll-icon;
+        animation-duration: 1.5s;
+        animation-direction: alternate;
+        animation-iteration-count: infinite;
     }
 }
 
 /* === ABOUT-US SECTION STYLES === */
 .about-us {
-    padding: 160px 0;
+    padding: 120px 0;
     &-content {
         @extend .frame;
         padding: 8.4% 18.4% 6.4%;
@@ -170,9 +215,9 @@ button {
 
 /* === SERVICES SECTION STYLES === */
 .services {
-    padding: 130px 0 110px;
+    padding: 120px 0;
     color: $text-color-2;
-    background-image: url('../img/services-bg-img.jpg');
+    background-color: $main-bg-color;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -180,38 +225,12 @@ button {
         @extend .frame;
         padding: 8.4% 18.4% 6.4%;
         border-top: none;
-        h2 {
-            background-color: initial;
-            width: 100%;
-            &:before {
-                content: '';
-                display: inline-block;
-                width: 26.6%;
-                height: 2px;
-                background-color: #FFFFFF;
-                position: absolute;
-                top: 50%;
-                left: 0;
-                transform: translateY(-50%);
-            }
-            &:after {
-                content: '';
-                display: inline-block;
-                width: 26.6%;
-                height: 2px;
-                background-color: #FFFFFF;
-                position: absolute;
-                top: 50%;
-                right: 0;
-                transform: translateY(-50%);
-            }
-        }
     }
 }
 
 /* === WHAT-WE-DO SECTION STYLES === */
 .what-we-do {
-    padding: 120px 0 115px;
+    padding: 120px 0;
     &-content {
         @extend .frame;
         padding: 13.7% 19.5% 10.3%;
@@ -232,19 +251,20 @@ button {
         padding: 0;
     }
     &-item {
-        padding-top: 57.0054119062%; //(237 / 415.75) * 100%;
+        padding-top: 57.0054119062%;
         border-bottom: 10px solid;
+        background-color: $main-bg-color;
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
         overflow: hidden;
         position: relative;
-        &:hover span {
+        cursor: pointer;
+        &:hover .work-item-label {
             left: 50%;
-            //right: 5%;
             transform: translateX(-50%);
         }
-        @media (min-width: $break-sm) {
+        @media (min-width: $break-md) {
             border-right: 10px solid;
         }
     }
@@ -254,7 +274,7 @@ button {
         left: 0;
         width: 100%;
         height: 100%;
-        span {
+        .work-item-label {
             display: inline-block;
             font-size: 3.4rem;
             font-weight: $bold;
@@ -269,23 +289,37 @@ button {
 
 /* === CONTACT-US SECTION STYLES === */
 .contact-us {
-    padding: 140px 0 60px;
+    padding: 120px 0;
     &-content {
         @extend .frame;
-        padding: 8.3% 20.9% 5.4%;
+        padding: 8.3% 10% 5.4%;
+        @media (min-width: $break-sm) {
+            padding-left: 20.9%;
+            padding-right: 20.9%;
+        }
     }
     &-paragraph {
         margin-bottom: 45px;
     }
     &-btn {
-        width: 76%;
+        width: 100%;
         height: 60px;
-        border: none;
+        border: 2px solid transparent;
         font-size: 1.6rem;
         text-transform: uppercase;
         letter-spacing: 3px;
         color: $text-color-2;
-        background-color: #3C3C3C;
+        background-color: $btn-bg-color;
+        transition: all .5s;
+        &:hover {
+            border: 2px solid $btn-bg-color;
+            color: $text-color-1;
+            background-color: transparent;
+            font-weight: $bold;
+        }
+        @media (min-width: $break-md) {
+            width: 76%;
+        }
     }
 }
 
@@ -301,19 +335,31 @@ button {
         font-size: 1.4rem;
         font-weight: $regular;
         img {
-            margin: 0;
-            margin-right: 35px;
+            margin: 0 20px;
         }
     }
+}
+
+@keyframes scroll-icon {
+    from {opacity: 0;}
+    to {opacity: 1;}
 }
 
 /* === MEDIA QUERIES STYLES === */
 @media (min-width: $break-sm) {
     @include column-size(sm);
+    
+    .text-wrap {
+        display: block;
+    }
 }
 
 @media (min-width: $break-md) {
     @include column-size(md);
+}
+
+@media (min-width: $break-lg) {
+    @include column-size(lg);
     
     .border-right-none {
         border-right: none;
@@ -328,6 +374,6 @@ button {
     }
 }
 
-@media (min-width: $break-lg) {
-    @include column-size(lg);
+@media (min-width: $break-xl) {
+    @include column-size(xl);
 }
