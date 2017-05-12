@@ -180,7 +180,7 @@ button {
     &-content {
         text-align: center;
         @media (min-width: $break-xl) {
-            padding-top: 18%;
+            padding-top: 15%;
         }
     }
     &-heading {
@@ -198,7 +198,7 @@ button {
             margin-bottom: 1em;
         }
         @media (min-width: $break-xl) {
-            margin-bottom: 20%;
+            margin-bottom: 15%;
         }
     }
     .scroll-icon {

@@ -166,7 +166,7 @@ button {
     text-align: center; }
     @media (min-width: 1200px) {
       .page-header-content {
-        padding-top: 18%; } }
+        padding-top: 15%; } }
   .page-header-heading {
     text-transform: uppercase;
     letter-spacing: 5px; }
@@ -182,7 +182,7 @@ button {
         margin-bottom: 1em; } }
     @media (min-width: 1200px) {
       .page-header-paragraph {
-        margin-bottom: 20%; } }
+        margin-bottom: 15%; } }
   .page-header .scroll-icon {
     font-size: 5rem;
     animation-name: scroll-icon;
