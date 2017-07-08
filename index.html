@@ -16,8 +16,9 @@
                 <img src="img/header-icon-top.png" alt="">
                 <h1 class="page-header-heading">Working <span class="text-wrap">with design lab</span></h1>
                 <p class="page-header-paragraph">We’ve been helping startups launch and grow their businesses. <span class="text-wrap">We help you to fill the gap between development,</span> design and product management.</p>
-<!--                <img src="img/header-icon-bottom.png" alt="" class="scroll-icon animated slideInUp infinite" data-wow-duration="2s">-->
-                <i class="scroll-icon fa fa-angle-down" aria-hidden="true"></i>
+                <div class="mouse">
+                    <div class="scroller"></div>
+                </div>
             </div>
         </div>
     </header><!-- PAGE-HEADER END -->
@@ -129,13 +130,14 @@
         <p class="page-footer-paragraph"><img src="img/footer-icon.png" alt="">&copy; 2017. All Rights Reserved Ellipsis.com</p>
     </footer><!-- PAGE-FOOTER END -->
     
+    <!-- SCRIPTS -->
     <script src="js/wow.min.js"></script>
     <script>
         wow = new WOW({
           boxClass:     'wow',      // default
           animateClass: 'animated', // default
           offset:       0,          // default
-          mobile:       false,
+          mobile:       true,       // default
           live:         true        // default
         })
         wow.init();
