@@ -51,7 +51,7 @@ h1 {
     margin: 3% 0;
     font-size: 3.6rem;
     font-weight: $bold;
-    @media (min-width: $break-md) {
+    @media screen and (min-width: $break-md) {
         font-size: 5.4rem;
     }
 }
@@ -63,13 +63,13 @@ h2 {
     text-transform: uppercase;
     letter-spacing: 2px;
     position: relative;
-    @media (min-width: $break-sm) {
+    @media screen and (min-width: $break-sm) {
         width: 420px;
         padding: 0;
     }
 }
 
-h2:before {
+h2::before {
     content: '';
     display: block;
     width: 1000px;
@@ -77,12 +77,12 @@ h2:before {
     position: absolute;
     top: 50%;
     left: calc(100% + 40px);
-    @media (min-width: $break-sm) {
+    @media screen and (min-width: $break-sm) {
         left: 100%;
     }
 }
 
-h2:after {
+h2::after {
     content: '';
     display: block;
     width: 1000px;
@@ -90,7 +90,7 @@ h2:after {
     position: absolute;
     top: 50%;
     right: calc(100% + 40px);
-    @media (min-width: $break-sm) {
+    @media screen and (min-width: $break-sm) {
         right: 100%;
     }
 }
@@ -121,12 +121,6 @@ button {
     cursor: pointer;
 }
 
-.container {
-    max-width: 900px;
-    width: 100%;
-    margin: 0 auto;
-}
-
 /* === ADDITIONAL STYLES === */
 .frame {
     position: relative;
@@ -145,12 +139,18 @@ button {
 }
 
 /* === GRID SYSTEM STYLES === */
+.container {
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+}
+
 .container-fluid {
     width: 100%;
     margin: 0 auto;
 }
 
-.row:before, .row:after {
+.row::before, .row::after {
     content: '';
     display: table;
     clear: both;
@@ -167,46 +167,63 @@ button {
 
 /* === PAGE-HEADER STYLES === */
 .page-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
     color: $text-color-2;
-    background-color: $main-bg-color;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+    background: {
+        color: $main-bg-color;
+        repeat: no-repeat;
+        position: center;
+        size: cover;
+    }
+    position: relative;
     overflow: hidden;
     &-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
         text-align: center;
-        @media (min-width: $break-xl) {
-            padding-top: 15%;
-        }
     }
     &-heading {
         text-transform: uppercase;
         letter-spacing: 5px;
     }
     &-paragraph {
-        margin-bottom: 0;
-        font-size: 1.5rem;
-        font-weight: $regular;
+        padding: 0 10px;
+        margin: 0;
+        font: {
+            size: 1.5rem;
+            weight: $regular;
+        }
         line-height: 2.6rem;
         text-transform: uppercase;
-        @media (min-width: $break-sm) {
+        @media screen and (min-width: $break-sm) {
+            padding: 0;
             line-height: 2.9rem;
-            margin-bottom: 1em;
-        }
-        @media (min-width: $break-xl) {
-            margin-bottom: 15%;
         }
     }
-    .scroll-icon {
-        font-size: 5rem;
-        animation-name: scroll-icon;
-        animation-duration: 1.5s;
-        animation-direction: alternate;
-        animation-iteration-count: infinite;
+    .mouse {
+        width: 23px;
+        height: 37px;
+        border: 2px solid;
+        border-radius: 12px;
+        position: absolute;
+        bottom: 4%;
+        left: 50%;
+        transform: translate(-50%, 0);
+        @media screen and (orientation: landscape) and (max-width: $break-md - 1) {
+            display: none;
+        }
+        @media screen and (min-width: $break-md) {
+            bottom: 10%;
+        }
+        .scroller {
+            width: 3px;
+            height: 3px;
+            margin: 6px auto 0;
+            background-color: $text-color-2;
+            animation: scroll-icon 1.5s infinite;
+        }
     }
 }
 
@@ -223,10 +240,12 @@ button {
 .services {
     padding: 120px 0;
     color: $text-color-2;
-    background-color: $main-bg-color;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+    background: {
+        color: $main-bg-color;
+        repeat: no-repeat;
+        position: center;
+        size: cover;
+    }
     &-content {
         @extend .frame;
         padding: 8.4% 18.4% 6.4%;
@@ -259,10 +278,12 @@ button {
     &-item {
         padding-top: 57.0054119062%;
         border-bottom: 10px solid;
-        background-color: $main-bg-color;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
+        background: {
+            color: $main-bg-color;
+            position: center;
+            repeat: no-repeat;
+            size: cover;
+        }
         overflow: hidden;
         position: relative;
         cursor: pointer;
@@ -270,7 +291,7 @@ button {
             left: 50%;
             transform: translateX(-50%);
         }
-        @media (min-width: $break-md) {
+        @media screen and (min-width: $break-md) {
             border-right: 10px solid;
         }
     }
@@ -282,8 +303,10 @@ button {
         height: 100%;
         .work-item-label {
             display: inline-block;
-            font-size: 3.4rem;
-            font-weight: $bold;
+            font: {
+                size: 3.4rem;
+                weight: $bold;
+            }
             text-transform: uppercase;
             position: absolute;
             top: 65%;
@@ -299,9 +322,11 @@ button {
     &-content {
         @extend .frame;
         padding: 8.3% 10% 5.4%;
-        @media (min-width: $break-sm) {
-            padding-left: 20.9%;
-            padding-right: 20.9%;
+        @media screen and (min-width: $break-sm) {
+            padding {
+                left: 20.9%;
+                right: 20.9%;
+            }
         }
     }
     &-paragraph {
@@ -323,7 +348,7 @@ button {
             background-color: transparent;
             font-weight: $bold;
         }
-        @media (min-width: $break-md) {
+        @media screen and (min-width: $break-md) {
             width: 76%;
         }
     }
@@ -336,23 +361,34 @@ button {
         justify-content: center;
         align-items: center;
         flex-wrap: wrap;
-        margin-top: 0;
-        margin-bottom: 60px;
-        font-size: 1.4rem;
-        font-weight: $regular;
+        margin: {
+            top: 0;
+            bottom: 60px;
+        }
+        font: {
+            size: 1.4rem;
+            weight: $regular;
+        }
         img {
             margin: 0 20px;
         }
     }
 }
 
+/* === ANIMATIONS === */
 @keyframes scroll-icon {
-    from {opacity: 0;}
-    to {opacity: 1;}
+    from {
+        margin-top: 6px;
+        opacity: 1;
+    }
+    to {
+        margin-top: 12px;
+        opacity: 0;
+    }
 }
 
 /* === MEDIA QUERIES STYLES === */
-@media (min-width: $break-sm) {
+@media screen and (min-width: $break-sm) {
     @include column-size(sm);
     
     .text-wrap {
@@ -360,11 +396,11 @@ button {
     }
 }
 
-@media (min-width: $break-md) {
+@media screen and (min-width: $break-md) {
     @include column-size(md);
 }
 
-@media (min-width: $break-lg) {
+@media screen and (min-width: $break-lg) {
     @include column-size(lg);
     
     .border-right-none {
@@ -380,6 +416,6 @@ button {
     }
 }
 
-@media (min-width: $break-xl) {
+@media screen and (min-width: $break-xl) {
     @include column-size(xl);
 }

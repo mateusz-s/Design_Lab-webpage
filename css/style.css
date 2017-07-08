@@ -15,7 +15,7 @@ h1 {
   margin: 3% 0;
   font-size: 3.6rem;
   font-weight: 700; }
-  @media (min-width: 768px) {
+  @media screen and (min-width: 768px) {
     h1 {
       font-size: 5.4rem; } }
 
@@ -26,12 +26,12 @@ h2 {
   text-transform: uppercase;
   letter-spacing: 2px;
   position: relative; }
-  @media (min-width: 576px) {
+  @media screen and (min-width: 576px) {
     h2 {
       width: 420px;
       padding: 0; } }
 
-h2:before {
+h2::before {
   content: '';
   display: block;
   width: 1000px;
@@ -39,11 +39,11 @@ h2:before {
   position: absolute;
   top: 50%;
   left: calc(100% + 40px); }
-  @media (min-width: 576px) {
-    h2:before {
+  @media screen and (min-width: 576px) {
+    h2::before {
       left: 100%; } }
 
-h2:after {
+h2::after {
   content: '';
   display: block;
   width: 1000px;
@@ -51,8 +51,8 @@ h2:after {
   position: absolute;
   top: 50%;
   right: calc(100% + 40px); }
-  @media (min-width: 576px) {
-    h2:after {
+  @media screen and (min-width: 576px) {
+    h2::after {
       right: 100%; } }
 
 h3 {
@@ -77,11 +77,6 @@ button {
   outline: none;
   cursor: pointer; }
 
-.container {
-  max-width: 900px;
-  width: 100%;
-  margin: 0 auto; }
-
 /* === ADDITIONAL STYLES === */
 .frame, .about-us-content, .services-content, .what-we-do-content, .contact-us-content {
   position: relative;
@@ -98,11 +93,16 @@ button {
   overflow: hidden; }
 
 /* === GRID SYSTEM STYLES === */
+.container {
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto; }
+
 .container-fluid {
   width: 100%;
   margin: 0 auto; }
 
-.row:before, .row:after {
+.row::before, .row::after {
   content: '';
   display: table;
   clear: both; }
@@ -152,43 +152,55 @@ button {
 
 /* === PAGE-HEADER STYLES === */
 .page-header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
   color: #FFFFFF;
   background-color: #A8B3C8;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  position: relative;
   overflow: hidden; }
   .page-header-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
     text-align: center; }
-    @media (min-width: 1200px) {
-      .page-header-content {
-        padding-top: 15%; } }
   .page-header-heading {
     text-transform: uppercase;
     letter-spacing: 5px; }
   .page-header-paragraph {
-    margin-bottom: 0;
+    padding: 0 10px;
+    margin: 0;
     font-size: 1.5rem;
     font-weight: 400;
     line-height: 2.6rem;
     text-transform: uppercase; }
-    @media (min-width: 576px) {
+    @media screen and (min-width: 576px) {
       .page-header-paragraph {
-        line-height: 2.9rem;
-        margin-bottom: 1em; } }
-    @media (min-width: 1200px) {
-      .page-header-paragraph {
-        margin-bottom: 15%; } }
-  .page-header .scroll-icon {
-    font-size: 5rem;
-    animation-name: scroll-icon;
-    animation-duration: 1.5s;
-    animation-direction: alternate;
-    animation-iteration-count: infinite; }
+        padding: 0;
+        line-height: 2.9rem; } }
+  .page-header .mouse {
+    width: 23px;
+    height: 37px;
+    border: 2px solid;
+    border-radius: 12px;
+    position: absolute;
+    bottom: 4%;
+    left: 50%;
+    transform: translate(-50%, 0); }
+    @media screen and (orientation: landscape) and (max-width: 767px) {
+      .page-header .mouse {
+        display: none; } }
+    @media screen and (min-width: 768px) {
+      .page-header .mouse {
+        bottom: 10%; } }
+    .page-header .mouse .scroller {
+      width: 3px;
+      height: 3px;
+      margin: 6px auto 0;
+      background-color: #FFFFFF;
+      animation: scroll-icon 1.5s infinite; }
 
 /* === ABOUT-US SECTION STYLES === */
 .about-us {
@@ -237,7 +249,7 @@ button {
     .works-item:hover .work-item-label {
       left: 50%;
       transform: translateX(-50%); }
-    @media (min-width: 768px) {
+    @media screen and (min-width: 768px) {
       .works-item {
         border-right: 10px solid; } }
   .works-layer {
@@ -261,10 +273,10 @@ button {
   padding: 120px 0; }
   .contact-us-content {
     padding: 8.3% 10% 5.4%; }
-    @media (min-width: 576px) {
-      .contact-us-content {
-        padding-left: 20.9%;
-        padding-right: 20.9%; } }
+    @media screen and (min-width: 576px) {
+      .contact-us-content padding {
+        left: 20.9%;
+        right: 20.9%; } }
   .contact-us-paragraph {
     margin-bottom: 45px; }
   .contact-us-btn {
@@ -282,7 +294,7 @@ button {
       color: #3C3C3C;
       background-color: transparent;
       font-weight: 700; }
-    @media (min-width: 768px) {
+    @media screen and (min-width: 768px) {
       .contact-us-btn {
         width: 76%; } }
 
@@ -299,14 +311,17 @@ button {
   .page-footer-paragraph img {
     margin: 0 20px; }
 
+/* === ANIMATIONS === */
 @keyframes scroll-icon {
   from {
-    opacity: 0; }
+    margin-top: 6px;
+    opacity: 1; }
   to {
-    opacity: 1; } }
+    margin-top: 12px;
+    opacity: 0; } }
 
 /* === MEDIA QUERIES STYLES === */
-@media (min-width: 576px) {
+@media screen and (min-width: 576px) {
   .col-sm-1 {
     width: 8.3333333333%; }
   .col-sm-2 {
@@ -334,7 +349,7 @@ button {
   .text-wrap {
     display: block; } }
 
-@media (min-width: 768px) {
+@media screen and (min-width: 768px) {
   .col-md-1 {
     width: 8.3333333333%; }
   .col-md-2 {
@@ -360,7 +375,7 @@ button {
   .col-md-12 {
     width: 100%; } }
 
-@media (min-width: 992px) {
+@media screen and (min-width: 992px) {
   .col-lg-1 {
     width: 8.3333333333%; }
   .col-lg-2 {
@@ -392,7 +407,7 @@ button {
   .works-large {
     padding-top: 28.5027059531%; } }
 
-@media (min-width: 1200px) {
+@media screen and (min-width: 1200px) {
   .col-xl-1 {
     width: 8.3333333333%; }
   .col-xl-2 {
